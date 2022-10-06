@@ -9,8 +9,10 @@ import org.springframework.core.io.Resource;
 import org.springframework.util.Assert;
 
 import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @SpringBootApplication
 public class ToWebpApplication implements ApplicationRunner {
@@ -32,16 +34,16 @@ public class ToWebpApplication implements ApplicationRunner {
     }
 
     private void jpgToWebp() throws Exception {
-        var bufferedImage = ImageIO.read(this.javascript_jpg.getInputStream());
+        BufferedImage bufferedImage = ImageIO.read(this.javascript_jpg.getInputStream());
         Assert.notNull(bufferedImage, "bufferedImage must be not null");
-        var webpFile = Files.createFile(Path.of("javascript.webp"));
+        Path webpFile = Files.createFile(Paths.get("javascript.webp"));
         ImageIO.write(bufferedImage, "webp", webpFile.toFile());
     }
 
     private void pngToWebp() throws Exception {
-        var bufferedImage = ImageIO.read(this.vscode_png.getInputStream());
+        BufferedImage bufferedImage = ImageIO.read(this.vscode_png.getInputStream());
         Assert.notNull(bufferedImage, "bufferedImage must be not null");
-        var webpFile = Files.createFile(Path.of("vscode.webp"));
+        Path webpFile = Files.createFile(Paths.get("vscode.webp"));
         ImageIO.write(bufferedImage, "webp", webpFile.toFile());
     }
 }
