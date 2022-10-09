@@ -36,14 +36,16 @@ public class ToWebpApplication implements ApplicationRunner {
     private void jpgToWebp() throws Exception {
         BufferedImage bufferedImage = ImageIO.read(this.javascript_jpg.getInputStream());
         Assert.notNull(bufferedImage, "bufferedImage must be not null");
-        Path webpFile = Files.createFile(Paths.get("javascript.webp"));
+        Path webpFile = Paths.get("javascript.webp");
+        Files.deleteIfExists(webpFile);
         ImageIO.write(bufferedImage, "webp", webpFile.toFile());
     }
 
     private void pngToWebp() throws Exception {
         BufferedImage bufferedImage = ImageIO.read(this.vscode_png.getInputStream());
         Assert.notNull(bufferedImage, "bufferedImage must be not null");
-        Path webpFile = Files.createFile(Paths.get("vscode.webp"));
+        Path webpFile = Paths.get("vscode.webp");
+        Files.deleteIfExists(webpFile);
         ImageIO.write(bufferedImage, "webp", webpFile.toFile());
     }
 }
